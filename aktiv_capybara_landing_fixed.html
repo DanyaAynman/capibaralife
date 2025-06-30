@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Aktiv Company с капибарами</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f4f8;
+    }
+
+    header, section, footer {
+      padding: 20px;
+      text-align: center;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #004c99;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 10px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+
+    footer {
+      font-size: 14px;
+      color: #666;
+      background: #e0e0e0;
+    }
+
+    /* Модальное окно */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .modal img {
+      max-height: 300px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .modal-close:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<header data-aos="fade-down">
+  <h1>Aktiv Company</h1>
+  <p>Технологии для защищённого будущего — теперь с капибарами 🐹</p>
+  <img src="https://images.unsplash.com/photo-1504203707990-024716f59d6a?auto=format&fit=crop&w=800&q=80" alt="Капибара в монокле" data-aos="zoom-in">
+</header>
+
+<section data-aos="fade-up">
+  <h2>О нас</h2>
+  <p>Интегрируем собственные решения в сфере кибербезопасности уже 30 лет.</p>
+  <img src="https://cdn.pixabay.com/photo/2018/07/04/21/24/capybara-3512385_1280.jpg" alt="Капибара в шапочке" data-aos="zoom-in-up">
+</section>
+
+<section data-aos="fade-up">
+  <h2>Наши продукты</h2>
+  <div class="grid">
+    <div data-aos="fade-right">
+      <h3>Rutoken</h3>
+      <img src="https://images.unsplash.com/photo-1565120130283-64fba5de2c3f?auto=format&fit=crop&w=800&q=80" alt="Капибара принимает ванну">
+      <p>Устройство для аутентификации и электронной подписи.</p>
+    </div>
+    <div data-aos="fade-up">
+      <h3>Guardant</h3>
+      <img src="https://cdn.pixabay.com/photo/2018/01/13/20/50/capybara-3086515_1280.jpg" alt="Капибара играет в куклы">
+      <p>Аппаратные ключи для защиты ПО и управления лицензиями.</p>
+    </div>
+    <div data-aos="fade-left">
+      <h3>Consulting</h3>
+      <img src="https://images.unsplash.com/photo-1504203707990-024716f59d6a?auto=format&fit=crop&w=800&q=80" alt="Капибара в монокле 2">
+      <p>Консалтинг в сфере информационной безопасности.</p>
+    </div>
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2>Контакты</h2>
+  <form action="#" method="post" data-aos="zoom-in-up">
+    <p><input type="text" name="name" placeholder="Имя" required></p>
+    <p><input type="email" name="email" placeholder="Email" required></p>
+    <p><textarea name="msg" rows="4" placeholder="Сообщение"></textarea></p>
+    <p><button class="btn" type="submit">Отправить</button></p>
+  </form>
+  <p><button class="btn" onclick="openModal()">Показать капибару 🛁</button></p>
+</section>
+
+<footer data-aos="fade-in">
+  <p>© 1994–2025 Aktiv Company. Все права защищены.</p>
+</footer>
+
+<!-- Модальное окно -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <h3>Капибара релаксирует 😌</h3>
+    <img src="https://images.unsplash.com/photo-1565120130283-64fba5de2c3f?auto=format&fit=crop&w=800&q=80" alt="Капибара в ванной">
+    <p>Иногда нужно просто остановиться и принять тёплую ванну...</p>
+  </div>
+</div>
+
+<!-- AOS и модалка -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+
+  function openModal() {
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  // Закрытие по клику вне окна
+  window.onclick = function(event) {
+    const modal = document.getElementById("modal");
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+</script>
+
+</body>
+</html>
