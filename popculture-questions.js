@@ -34,5 +34,10 @@ const POPCULTURE_QUESTIONS=[
 ];
 
 window.addEventListener("DOMContentLoaded",()=>{
-  if(typeof QUESTIONS!=="undefined") QUESTIONS.push(...POPCULTURE_QUESTIONS);
+  if(typeof QUESTIONS!=="undefined"){
+    QUESTIONS.push(...POPCULTURE_QUESTIONS);
+    QUESTIONS.forEach(question=>{
+      question.a.forEach((answer,index)=>{answer[1]=(index+1)*40;});
+    });
+  }
 });
