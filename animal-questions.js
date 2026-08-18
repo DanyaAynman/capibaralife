@@ -30,3 +30,20 @@ const ANIMAL_QUESTIONS=[
 {q:"Какое животное чаще всего ассоциируется с полосками?",a:[["зебра",240,["зебру"]],["тигр",200,["тигра"]],["енот",160,["енота"]],["скунс",120,["скунса"]],["окунь",80,["окуня"]],["рыба-клоун",40,["рыба клоун"]]]},
 {q:"Какое животное чаще всего ассоциируется с пятнами?",a:[["леопард",240,["леопарда"]],["жираф",200,["жирафа"]],["далматин",160,["далматинец"]],["гепард",120,["гепарда"]],["корова",80,["корову"]],["олень",40,["оленя"]]]}
 ];
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const oldButton=document.getElementById("newGameTop");
+  if(!oldButton)return;
+  const newButton=oldButton.cloneNode(true);
+  oldButton.replaceWith(newButton);
+  newButton.addEventListener("click",()=>{
+    let seen=[];
+    try{seen=JSON.parse(localStorage.getItem("seen1000Questions")||"[]")}catch(e){seen=[]}
+    let available=QUESTIONS.filter(x=>!seen.includes(x.q));
+    if(available.length<7){seen=[];available=[...QUESTIONS]}
+    pool=shuffle(available).slice(0,7);
+    const picked=pool.map(x=>x.q);
+    localStorage.setItem("seen1000Questions",JSON.stringify([...seen,...picked]));
+    idx=0;score=0;active=true;feedList.innerHTML="";loadQuestion();
+  });
+});
