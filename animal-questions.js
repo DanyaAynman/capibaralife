@@ -104,3 +104,27 @@ window.addEventListener("DOMContentLoaded",()=>{
     return originalFinish.apply(this,arguments);
   };
 });
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const style=document.createElement("style");
+  style.textContent=`
+    :root{--text:#3d2923;--muted:#704e43;--line:rgba(86,51,40,.24);--purple:#bd6f56;--cyan:#d99a78;--green1:#b66a52;--green2:#8f4f3d}
+    body{background:radial-gradient(circle at 12% 8%,rgba(242,184,151,.55),transparent 32%),radial-gradient(circle at 88% 12%,rgba(217,132,94,.34),transparent 30%),linear-gradient(180deg,#d99a78 0%,#c98265 48%,#b96f58 100%)!important}
+    .logo,.newgame{background:linear-gradient(145deg,#a95e49,#d28a68)!important;color:#fff!important;box-shadow:0 10px 28px rgba(92,48,36,.18)}
+    .answerbtn{background:linear-gradient(180deg,#a65d49,#874536)!important;color:#fff!important}
+    .fill{background:linear-gradient(90deg,#9e5946,#d38d69)!important}
+    .panel{background:linear-gradient(145deg,rgba(255,239,229,.88),rgba(238,191,166,.84))!important;border-color:rgba(86,51,40,.24)!important;box-shadow:0 24px 70px rgba(82,43,31,.19)!important}
+    .feed{background:linear-gradient(145deg,rgba(249,224,210,.92),rgba(224,165,137,.88))!important;border-color:rgba(86,51,40,.22)!important;box-shadow:0 24px 70px rgba(82,43,31,.16)!important}
+    .history{background:linear-gradient(145deg,rgba(250,228,216,.94),rgba(229,177,151,.9))!important;border-color:rgba(86,51,40,.22)!important;box-shadow:0 20px 60px rgba(82,43,31,.14)!important}
+    .pill,.secondary,.try,.history-card{background:rgba(255,239,230,.62)!important;color:#3d2923!important;border-color:rgba(86,51,40,.18)!important}
+    input{background:rgba(255,244,237,.9)!important;color:#3d2923!important;border-color:rgba(86,51,40,.24)!important}
+    input::placeholder{color:#8b675b!important}
+    .board{background:rgba(255,239,230,.92)!important;color:#3d2923!important;border-color:rgba(86,51,40,.2)!important}
+    .badge{color:#5b372d!important;border-color:rgba(91,55,45,.34)!important;background:rgba(255,233,221,.5)!important}
+    .good{color:#6a5637!important}.bad{color:#9a3f38!important}
+    .feedhint{color:#704e43!important}
+  `;
+  document.head.appendChild(style);
+  const hint=document.querySelector('.feedhint');
+  if(hint) hint.textContent='подсказка: ищи неочевидный ответ ✦';
+});
