@@ -39,9 +39,21 @@ window.addEventListener("DOMContentLoaded",()=>{
   newButton.addEventListener("click",()=>{
     let seen=[];
     try{seen=JSON.parse(localStorage.getItem("seen1000Questions")||"[]")}catch(e){seen=[]}
-    let available=QUESTIONS.filter(x=>!seen.includes(x.q));
-    if(available.length<7){seen=[];available=[...QUESTIONS]}
-    pool=shuffle(available).slice(0,7);
+
+    let animalAvailable=ANIMAL_QUESTIONS.filter(x=>!seen.includes(x.q));
+    let otherAvailable=QUESTIONS.filter(x=>!ANIMAL_QUESTIONS.some(a=>a.q===x.q) && !seen.includes(x.q));
+
+    if(animalAvailable.length+otherAvailable.length<7){
+      seen=[];
+      animalAvailable=[...ANIMAL_QUESTIONS];
+      otherAvailable=QUESTIONS.filter(x=>!ANIMAL_QUESTIONS.some(a=>a.q===x.q));
+    }
+
+    const animalPart=shuffle(animalAvailable).slice(0,Math.min(7,animalAvailable.length));
+    const need=7-animalPart.length;
+    const otherPart=need>0?shuffle(otherAvailable).slice(0,need):[];
+    pool=[...animalPart,...otherPart];
+
     const picked=pool.map(x=>x.q);
     localStorage.setItem("seen1000Questions",JSON.stringify([...seen,...picked]));
     idx=0;score=0;active=true;feedList.innerHTML="";loadQuestion();
