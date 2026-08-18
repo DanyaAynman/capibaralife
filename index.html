@@ -49,5 +49,6 @@ function nextQuestion(){if(!active||!solved)return;if(idx<6){idx++;loadQuestion(
 function finish(){active=false;try{let arr=JSON.parse(localStorage.getItem('last4Games')||'[]');const now=new Date();arr.unshift({score,date:now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})});localStorage.setItem('last4Games',JSON.stringify(arr.slice(0,4)))}catch(e){}renderHistory();document.getElementById('panel').innerHTML=`<div class="result"><div class="pill" style="display:inline-block">Игра завершена</div><div class="big">${score}</div><h2>${score>=1000?'Цель достигнута':'Игра окончена'}</h2><button class="restart" onclick="location.reload()">Новая игра</button></div>`}
 document.getElementById('newGameTop').onclick=startGame;answerBtn.onclick=submitAnswer;answerInput.addEventListener('keydown',e=>{if(e.key==='Enter')submitAnswer()});showBtn.onclick=showAnswers;nextBtn.onclick=nextQuestion;renderHistory();update();
 </script>
+<script src="ui-v5.js?v=20260819-5"></script>
 </body>
 </html>
