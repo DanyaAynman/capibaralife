@@ -43,23 +43,64 @@ window.addEventListener("DOMContentLoaded",()=>{
   newButton.addEventListener("click",()=>{
     let seen=[];
     try{seen=JSON.parse(localStorage.getItem("seen1000Questions")||"[]")}catch(e){seen=[]}
-
     let animalAvailable=ANIMAL_QUESTIONS.filter(x=>!seen.includes(x.q));
     let allAvailable=QUESTIONS.filter(x=>!seen.includes(x.q));
-
-    if(animalAvailable.length<1 || allAvailable.length<7){
-      seen=[];
-      animalAvailable=[...ANIMAL_QUESTIONS];
-      allAvailable=[...QUESTIONS];
-    }
-
+    if(animalAvailable.length<1 || allAvailable.length<7){seen=[];animalAvailable=[...ANIMAL_QUESTIONS];allAvailable=[...QUESTIONS]}
     const first=shuffle(animalAvailable)[0];
     const restPool=allAvailable.filter(x=>x.q!==first.q);
     const rest=shuffle(restPool).slice(0,6);
     pool=[first,...rest];
-
     const picked=pool.map(x=>x.q);
     localStorage.setItem("seen1000Questions",JSON.stringify([...seen,...picked]));
     idx=0;score=0;active=true;feedList.innerHTML="";loadQuestion();
   });
+});
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const style=document.createElement("style");
+  style.textContent=`
+    :root{--text:#4b342f;--muted:#7c5b52;--line:rgba(112,73,61,.18)}
+    body{color:var(--text)!important;background:radial-gradient(circle at 12% 8%,rgba(255,238,221,.95),transparent 32%),radial-gradient(circle at 88% 12%,rgba(255,207,181,.62),transparent 30%),linear-gradient(180deg,#f9d9c4 0%,#f6cdb7 48%,#f3d7c7 100%)!important}
+    .panel{background:linear-gradient(145deg,rgba(255,248,242,.84),rgba(255,224,207,.78))!important;box-shadow:0 24px 70px rgba(120,70,50,.16)!important}
+    .feed{background:linear-gradient(145deg,rgba(255,244,236,.9),rgba(249,216,199,.88))!important;box-shadow:0 24px 70px rgba(120,70,50,.13)!important}
+    .pill,.secondary,.try{background:rgba(255,255,255,.42)!important;color:#4b342f!important}
+    input{background:rgba(255,250,246,.8)!important;color:#4b342f!important;border-color:rgba(112,73,61,.22)!important}
+    input::placeholder{color:#9c786c!important}
+    .board{background:rgba(255,246,240,.82)!important;color:#4b342f!important}
+    .badge{color:#6a463b!important;border-color:rgba(106,70,59,.32)!important;background:rgba(255,255,255,.35)}
+    .history{margin-top:26px;padding:24px;border:1px solid var(--line);border-radius:28px;background:rgba(255,248,242,.78);box-shadow:0 20px 60px rgba(120,70,50,.12)}
+    .history h2{margin:0 0 16px;font-size:28px}.history-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.history-card{padding:16px 12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.46);text-align:center}.history-card strong{display:block;font-size:26px;margin-top:4px}.history-card small{color:var(--muted)}
+    @media(max-width:640px){.history-grid{grid-template-columns:repeat(2,1fr)}}
+  `;
+  document.head.appendChild(style);
+
+  const feed=document.querySelector('.feed');
+  if(feed){
+    const history=document.createElement('section');
+    history.className='history';
+    history.innerHTML='<h2>Последние игры</h2><div class="history-grid" id="historyGrid"></div>';
+    feed.insertAdjacentElement('afterend',history);
+  }
+
+  function renderHistory(){
+    const grid=document.getElementById('historyGrid'); if(!grid)return;
+    let arr=[]; try{arr=JSON.parse(localStorage.getItem('last4Games')||'[]')}catch(e){}
+    grid.innerHTML='';
+    if(!arr.length){grid.innerHTML='<div style="grid-column:1/-1;color:var(--muted)">Здесь появятся результаты после завершения первой игры.</div>';return}
+    arr.forEach((g,i)=>{const d=document.createElement('div');d.className='history-card';d.innerHTML=`<small>Игра ${i+1}</small><strong>${g.score}</strong><small>${g.date||''}</small>`;grid.appendChild(d)});
+  }
+  renderHistory();
+
+  const originalFinish=window.finish;
+  window.finish=function(){
+    try{
+      let arr=JSON.parse(localStorage.getItem('last4Games')||'[]');
+      const now=new Date();
+      arr.unshift({score:score,date:now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'})});
+      arr=arr.slice(0,4);
+      localStorage.setItem('last4Games',JSON.stringify(arr));
+    }catch(e){}
+    renderHistory();
+    return originalFinish.apply(this,arguments);
+  };
 });
