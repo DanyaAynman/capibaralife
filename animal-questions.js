@@ -31,6 +31,10 @@ const ANIMAL_QUESTIONS=[
 {q:"Какое животное чаще всего ассоциируется с пятнами?",a:[["леопард",240,["леопарда"]],["жираф",200,["жирафа"]],["далматин",160,["далматинец"]],["гепард",120,["гепарда"]],["корова",80,["корову"]],["олень",40,["оленя"]]]}
 ];
 
+const popCultureScript=document.createElement("script");
+popCultureScript.src="popculture-questions.js";
+document.head.appendChild(popCultureScript);
+
 window.addEventListener("DOMContentLoaded",()=>{
   const oldButton=document.getElementById("newGameTop");
   if(!oldButton)return;
@@ -41,18 +45,18 @@ window.addEventListener("DOMContentLoaded",()=>{
     try{seen=JSON.parse(localStorage.getItem("seen1000Questions")||"[]")}catch(e){seen=[]}
 
     let animalAvailable=ANIMAL_QUESTIONS.filter(x=>!seen.includes(x.q));
-    let otherAvailable=QUESTIONS.filter(x=>!ANIMAL_QUESTIONS.some(a=>a.q===x.q) && !seen.includes(x.q));
+    let allAvailable=QUESTIONS.filter(x=>!seen.includes(x.q));
 
-    if(animalAvailable.length+otherAvailable.length<7){
+    if(animalAvailable.length<1 || allAvailable.length<7){
       seen=[];
       animalAvailable=[...ANIMAL_QUESTIONS];
-      otherAvailable=QUESTIONS.filter(x=>!ANIMAL_QUESTIONS.some(a=>a.q===x.q));
+      allAvailable=[...QUESTIONS];
     }
 
-    const animalPart=shuffle(animalAvailable).slice(0,Math.min(7,animalAvailable.length));
-    const need=7-animalPart.length;
-    const otherPart=need>0?shuffle(otherAvailable).slice(0,need):[];
-    pool=[...animalPart,...otherPart];
+    const first=shuffle(animalAvailable)[0];
+    const restPool=allAvailable.filter(x=>x.q!==first.q);
+    const rest=shuffle(restPool).slice(0,6);
+    pool=[first,...rest];
 
     const picked=pool.map(x=>x.q);
     localStorage.setItem("seen1000Questions",JSON.stringify([...seen,...picked]));
