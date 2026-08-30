@@ -1,0 +1,154 @@
+(()=>{'use strict';
+const REF='zrwhqqrnnlecgduomwkc';
+const KEY=['sb','publishable','Cmm-ycVs46bTSnWjEjTrlQ','kIyO5SLr'].join('_');
+const $=id=>document.getElementById(id);
+const P=new URLSearchParams(location.search);
+const rp=(P.get('room')||'').replace(/\D/g,'').slice(0,6);
+const AV=['🦊','🐼','🐯','🦁','🐸','🐨','🐰','🐵'];
+const PC=['#F4C542','#7B61FF','#C13FA1','#6B2D5C','#F28C28','#69B3A2','#7C92D8','#86B874'];
+const img=f=>'https://commons.wikimedia.org/wiki/Special:Redirect/file/'+encodeURIComponent(f);
+const R=[
+ {v:[100,200,300,400,500],c:[
+  ['Животные',[
+   ['Какое животное изображено на фото?',['Енот'],'image',img('Raccoon_in_Central_Park_(35264).jpg')],
+   ['Какое животное спит зимой в берлоге?',['Медведь']],
+   ['Какое животное носит детёныша в сумке?',['Кенгуру']],
+   ['Какое животное известно длинным липким языком для ловли муравьёв?',['Муравьед','Большой муравьед']],
+   ['Какое животное может поворачивать голову примерно на 270 градусов?',['Сова']]
+  ]],
+  ['Мультфильмы',[
+   ['Как зовут зелёного огра из одноимённого мультфильма?',['Шрек']],
+   ['Как зовут снеговика из «Холодного сердца»?',['Олаф']],
+   ['Как зовут ковбоя из «Истории игрушек»?',['Вуди']],
+   ['Как называется город, где живут герои «Зверополиса»?',['Зверополис']],
+   ['Как зовут отца Симбы?',['Муфаса']]
+  ]],
+  ['География',[
+   ['Флаг какой страны показан?',['Швейцария'],'image',img('Flag_of_Switzerland.svg')],
+   ['Какая река протекает через Лондон?',['Темза']],
+   ['В какой стране находится гора Фудзи?',['Япония']],
+   ['Какой океан омывает восточное побережье США?',['Атлантический океан','Атлантический']],
+   ['Столица Новой Зеландии?',['Веллингтон']]
+  ]],
+  ['Природа',[
+   ['Что изображено на фото?',['Кактус'],'image',img('Saguaro_cactus.jpg')],
+   ['Как называется замёрзшая вода, падающая с неба шариками?',['Град']],
+   ['Как называется природное свечение неба у полюсов?',['Северное сияние','Полярное сияние']],
+   ['Как называется процесс, показанный на видео?',['Цветение','Распускание цветка','Распускание'],'video','https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'],
+   ['Как называется самая твёрдая природная форма углерода?',['Алмаз']]
+  ]],
+  ['Разное',[
+   ['Сколько сторон у восьмиугольника?',['8','Восемь']],
+   ['Как называется прибор для измерения температуры?',['Термометр']],
+   ['Какой месяц идёт после сентября?',['Октябрь']],
+   ['Сколько секунд в одной минуте?',['60','Шестьдесят']],
+   ['Как называется фигура без углов?',['Круг','Окружность']]
+  ]]
+ ]},
+ {v:[200,400,600,800,1000],c:[
+  ['Еда и напитки',[
+   ['Какой десерт изображён на фото?',['Тирамису'],'image',img('Tiramisu_-_Raffaele_Diomede.jpg')],
+   ['Из какого продукта делают тофу?',['Соя','Соевые бобы']],
+   ['Как называется холодный испанский суп из томатов?',['Гаспачо']],
+   ['Какой сыр традиционно кладут в греческий салат?',['Фета']],
+   ['Как называется японская лапша из гречневой муки?',['Соба']]
+  ]],
+  ['Города и страны',[
+   ['Флаг какой страны показан?',['Южная Корея','Корея'],'image',img('Flag_of_South_Korea.svg')],
+   ['В какой стране находится город Марракеш?',['Марокко']],
+   ['Столица Канады?',['Оттава']],
+   ['Какой город называют городом каналов и гондол?',['Венеция']],
+   ['В какой стране находится Мачу-Пикчу?',['Перу']]
+  ]],
+  ['Домашние и фермерские животные',[
+   ['Какое животное слышно на записи?',['Петух','Курица'],'audio',img('Rooster_crowing.ogg')],
+   ['Какое животное обычно охраняет стадо овец?',['Собака','Овчарка']],
+   ['Как называется самка свиньи?',['Свинья','Свиноматка']],
+   ['Какое животное на ферме несёт яйца?',['Курица']],
+   ['Как называется жилище пчёл, которое держит пасечник?',['Улей']]
+  ]],
+  ['Морские и речные животные',[
+   ['Какое морское животное имеет панцирь и клешни?',['Краб']],
+   ['Какая рыба способна генерировать электрический разряд?',['Электрический угорь','Угорь']],
+   ['Как называется морское млекопитающее с длинным бивнем?',['Нарвал']],
+   ['Какое речное животное строит плотины?',['Бобр']],
+   ['Какая рыба часто идёт на нерест из моря в реки?',['Лосось','Сёмга','Семга']]
+  ]],
+  ['Птицы',[
+   ['Какая птица изображена на фото?',['Фламинго'],'image',img('Greater_flamingo_(Phoenicopterus_roseus).jpg')],
+   ['Какая птица известна способностью повторять человеческую речь?',['Попугай']],
+   ['Какая птица является символом мира?',['Голубь']],
+   ['Какая птица слышна на записи?',['Сова'],'audio',img('Owlcall.ogg')],
+   ['Какая морская птица знаменита огромным размахом крыльев?',['Альбатрос']]
+  ]]
+ ]}
+];
+const FT=[
+ ['История','Как назывался торговый путь из Скандинавии в Византию через Русь?',['Путь из варяг в греки','Из варяг в греки']],
+ ['Кино','Как называется человек, который руководит съёмкой фильма?',['Режиссёр','Режиссер']],
+ ['Животные','Какое животное является крупнейшим представителем семейства кошачьих?',['Тигр']],
+ ['Космос','Как называется галактика, в которой находится Солнечная система?',['Млечный путь']],
+ ['География','Какой пролив разделяет Европу и Африку?',['Гибралтарский пролив','Гибралтар']],
+ ['Музыка','Как называется самый низкий мужской певческий голос?',['Бас']],
+ ['Спорт','Сколько игроков одной команды одновременно находится на футбольном поле?',['11','Одиннадцать']],
+ ['Еда','Как называется итальянское блюдо из риса кремовой консистенции?',['Ризотто']],
+ ['Технологии','Как расшифровывается GPS по смыслу?',['Глобальная система позиционирования','Система глобального позиционирования']],
+ ['Мифология','Как звали скандинавского бога грома?',['Тор']],
+ ['Природа','Как называется процесс превращения гусеницы в бабочку?',['Метаморфоз']],
+ ['Наука','Как называется единица силы в системе СИ?',['Ньютон']]
+];
+let room='',me='',name='',host=false,profile={a:0,c:0},ws,topic,ref=0,jref,joined=false;
+let players=new Map,chooser='',round=1,used=new Set,current=null,open=false,submitted=new Set,answered=new Set;
+let timer=null,tick=null,phase='lobby',topics=[],turn='',choice=null,wagers=new Map,finalAns=new Map;
+const show=id=>{['home','lobby','join','waiting','play','final'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
+const norm=s=>String(s).toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9]+/gi,' ').trim();
+const ok=(a,v)=>v.some(x=>norm(x)===norm(a));
+const uid=()=>crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36);
+const code=()=>String(Math.floor(100000+Math.random()*900000));
+const snap=()=>[...players.values()];
+const rank=()=>snap().sort((a,b)=>b.score-a.score);
+const cfg=()=>R[round-1];
+const key=(c,r)=>c+'-'+r;
+function push(t,e,p,r,j){if(ws?.readyState===1)ws.send(JSON.stringify({topic:t,event:e,payload:p,ref:r??String(++ref),join_ref:j??jref}))}
+function bc(type,data={}){push(topic,'broadcast',{type:'broadcast',event:'game',payload:{type,...data}})}
+function connect(){try{ws?.close()}catch(e){}topic='realtime:svoya-'+room;ws=new WebSocket('wss://'+REF+'.supabase.co/realtime/v1/websocket?apikey='+encodeURIComponent(KEY)+'&vsn=1.0.0');$('netStatus').textContent='подключение…';ws.onopen=()=>{jref=String(++ref);push(topic,'phx_join',{config:{broadcast:{ack:false,self:false},presence:{enabled:false},postgres_changes:[],private:false}},jref,jref)};ws.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(_){return}if(m.event==='phx_reply'&&m.ref===jref&&m.payload?.status==='ok'){joined=true;$('netStatus').textContent='сервер онлайн · '+room;afterJoin()}else if(m.event==='broadcast'){const d=m.payload?.payload;if(d?.type)handle(d)}};ws.onerror=()=>{$('netStatus').textContent='ошибка сети'}}
+setInterval(()=>{if(ws?.readyState===1)push('phoenix','heartbeat',{},String(++ref),null)},20000);
+function player(id,n,p){return{id,name:n,score:0,a:p.a,c:p.c}}
+function afterJoin(){if(host){players=new Map([[me,player(me,name,profile)]]);chooser=me;show('lobby');renderPlayers()}else{show('waiting');bc('hello',{id:me,name,profile});let h=setInterval(()=>{bc('hello',{id:me,name,profile});if(players.size)clearInterval(h)},1200)}}
+function renderPlayers(){['lobbyPlayers','waitingPlayers','scoreboard'].forEach(id=>{const b=$(id);if(!b)return;b.innerHTML='';snap().forEach(p=>{const d=document.createElement('div');d.className='playerCard'+(p.id===chooser?' active':'');d.style.setProperty('--pc',PC[p.c||0]);d.innerHTML='<div class="playerAvatar">'+AV[p.a||0]+'</div><b></b><div class="score"></div>';d.querySelector('b').textContent=p.name;d.querySelector('.score').textContent=p.score;b.appendChild(d)})});if($('playerCounter'))$('playerCounter').textContent=players.size+' / 8 игроков';if(host)$('startBtn').disabled=players.size<2}
+function sync(target){bc('state',{target,players:snap(),chooser,round,used:[...used],current,open,phase,topics,turn,choice})}
+function handle(d){if(d.type==='hello'&&host){if(!players.has(d.id)&&players.size<8)players.set(d.id,player(d.id,(d.name||'Игрок').slice(0,18),d.profile||{a:0,c:0}));renderPlayers();sync(d.id);return}if(d.target&&d.target!==me)return;if(d.type==='state'){players=new Map((d.players||[]).map(p=>[p.id,p]));chooser=d.chooser;round=d.round;used=new Set(d.used||[]);current=d.current;open=d.open;phase=d.phase;topics=d.topics||[];turn=d.turn||'';choice=d.choice;render();return}if(host&&d.type==='select')return d.id===chooser&&!open&&selectQ(d.ci,d.ri);if(host&&d.type==='answer')return hostAnswer(d.id,d.answer);if(host&&d.type==='remove_topic')return removeTopic(d.id,d.idx);if(host&&d.type==='wager')return hostWager(d.id,d.wager);if(host&&d.type==='final_answer')return hostFinal(d.id,d.answer);if(d.type==='game_start'){round=1;used.clear();chooser=d.chooser;phase='round';show('play');renderBoard()}if(d.type==='question'){current=d.current;open=true;submitted.clear();showQuestion()}if(d.type==='feedback'&&d.id===me){$('answerMsg').textContent=d.correct?'Правильно! +'+d.value:'Неверно. −'+d.value;$('answerMsg').className='msg '+(d.correct?'ok':'bad')}if(d.type==='closed'){current=d.current;open=false;chooser=d.chooser;players=new Map(d.players.map(p=>[p.id,p]));renderPlayers();showClosed()}if(d.type==='next'){used=new Set(d.used);chooser=d.chooser;current=null;open=false;renderBoard()}if(d.type==='transition'){players=new Map(d.players.map(p=>[p.id,p]));transition()}if(d.type==='round2'){round=2;used.clear();chooser=d.chooser;phase='round';current=null;open=false;show('play');renderBoard()}if(d.type==='topics'){players=new Map(d.players.map(p=>[p.id,p]));topics=d.topics;turn=d.turn;phase='topics';showTopics()}if(d.type==='topic_update'){topics=d.topics;turn=d.turn;showTopics()}if(d.type==='topic_chosen'){choice=d.choice;phase='wager';showWager()}if(d.type==='final_q'){choice=d.choice;phase='finalq';showFinalQ()}if(d.type==='results'){players=new Map(d.players.map(p=>[p.id,p]));showResults(d.results)}}
+function render(){renderPlayers();if(phase==='lobby')show(host?'lobby':'waiting');else if(phase==='round'){show('play');current?showQuestion():renderBoard()}else if(phase==='topics')showTopics();else if(phase==='wager')showWager();else if(phase==='finalq')showFinalQ()}
+function prof(p){profile={a:Number(localStorage.getItem(p+'Avatar')||0)%8,c:Number(localStorage.getItem(p+'Color')||0)%8}}
+function create(){name=$('creatorName').value.trim();if(!name)return;prof('creator');room=code();me=uid();host=true;$('roomCode').textContent=room;$('shareLink').textContent=location.origin+location.pathname+'?v=20&join=1&room='+room;connect()}
+function join(){name=$('joinName').value.trim();room=($('roomInput').value||rp).replace(/\D/g,'').slice(0,6);if(!name||room.length!==6)return;prof('guest');me=uid();connect()}
+function start(){if(!host||players.size<2)return;round=1;used.clear();chooser=me;phase='round';bc('game_start',{chooser});show('play');renderBoard()}
+function renderBoard(){show('play');$('questionWrap').classList.add('hidden');$('boardWrap').classList.remove('hidden');const b=$('board');b.innerHTML='';cfg().c.forEach(c=>{const h=document.createElement('div');h.className='cat';h.textContent=c[0];b.appendChild(h)});for(let r=0;r<5;r++)cfg().c.forEach((c,ci)=>{const x=document.createElement('button'),k=key(ci,r),can=me===chooser&&!open;x.className='cell'+(used.has(k)?' used':(!can?' locked':''));x.textContent=cfg().v[r];x.onclick=()=>{if(!can||used.has(k))return;host?selectQ(ci,r):bc('select',{id:me,ci,ri:r})};b.appendChild(x)});$('turnInfo').textContent='Раунд '+round+' · '+(me===chooser?'Ваш ход — выберите вопрос':'Выбирает '+(players.get(chooser)?.name||'игрок'));renderPlayers()}
+function selectQ(ci,ri){used.add(key(ci,ri));const q=cfg().c[ci][1][ri];current={ci,ri,cat:cfg().c[ci][0],value:cfg().v[ri],question:q[0],answers:q[1],type:q[2]||'text',media:q[3]||'',prev:chooser,startedAt:Date.now()};open=true;submitted.clear();answered.clear();showQuestion();bc('question',{current});clearTimeout(timer);timer=setTimeout(closeQ,30000)}
+function media(q){if(q.type==='image')return '<img class="mediaQ" src="'+q.media+'" alt="Фото вопроса">';if(q.type==='audio')return '<audio class="mediaQ" controls preload="auto" src="'+q.media+'"></audio>';if(q.type==='video')return '<video class="mediaQ" controls playsinline preload="metadata" src="'+q.media+'"></video>';return ''}
+function showQuestion(){show('play');$('boardWrap').classList.add('hidden');$('questionWrap').classList.remove('hidden');$('qMeta').textContent=current.cat+' · '+current.value;$('qText').textContent=current.question;$('qVisual').innerHTML=media(current);$('qVisual').classList.toggle('hidden',!current.media);$('answerInput').value='';$('answerInput').disabled=false;$('answerBtn').disabled=false;$('answerMsg').textContent='';$('answerReveal').classList.add('hidden');clearInterval(tick);const update=()=>{$('qTimer').textContent=Math.max(0,30-Math.floor((Date.now()-current.startedAt)/1000))};update();tick=setInterval(update,250)}
+function answer(){const a=$('answerInput').value.trim();if(!a||!open||submitted.has(me))return;submitted.add(me);$('answerInput').disabled=true;$('answerBtn').disabled=true;host?hostAnswer(me,a):bc('answer',{id:me,answer:a})}
+function hostAnswer(id,a){if(!open||answered.has(id)||!players.has(id))return;answered.add(id);const good=ok(a,current.answers),p=players.get(id);p.score+=good?current.value:-current.value;bc('feedback',{id,correct:good,value:current.value});if(good){chooser=id;open=false;clearTimeout(timer);clearInterval(tick);current={...current,result:'correct',winnerId:id,winnerName:p.name};bc('closed',{current,chooser,players:snap()});showClosed();nextLater()}else if(answered.size>=players.size)closeQ()}
+function closeQ(){if(!host||!open)return;open=false;clearInterval(tick);chooser=current.prev;current={...current,result:'timeout'};bc('closed',{current,chooser,players:snap()});showClosed();nextLater()}
+function showClosed(){clearInterval(tick);$('answerInput').disabled=true;$('answerBtn').disabled=true;$('answerMsg').textContent=current.result==='correct'?(current.winnerId===me?'Правильно! +'+current.value:current.winnerName+' ответил правильно'):'Никто не ответил правильно';$('answerReveal').textContent='Правильный ответ: '+current.answers[0];$('answerReveal').classList.remove('hidden')}
+function nextLater(){setTimeout(()=>{if(used.size===25)return roundEnd();current=null;open=false;bc('next',{chooser,used:[...used]});renderBoard()},1900)}
+function transition(){document.querySelector('.transitionOverlay')?.remove();document.body.insertAdjacentHTML('beforeend','<div class="transitionOverlay"><div class="transitionCard"><div class="roundBig">РАУНД 1 ЗАВЕРШЁН</div>'+rank().map((p,i)=>'<div class="rankLine">'+(['🥇','🥈','🥉'][i]||'•')+' '+p.name+' <b>'+p.score+'</b></div>').join('')+'<div class="countdownBig">5</div></div></div>');let n=5;const c=setInterval(()=>{const e=document.querySelector('.countdownBig');if(e)e.textContent=String(--n);if(n<=0){clearInterval(c);document.querySelector('.transitionOverlay')?.remove()}},1000)}
+function roundEnd(){if(round===1){bc('transition',{players:snap()});transition();setTimeout(()=>{round=2;used.clear();current=null;open=false;bc('round2',{chooser});renderBoard()},5000)}else startTopics()}
+function fbox(){let x=$('finalStage');if(!x){x=document.createElement('div');x.id='finalStage';x.className='card finalStage';document.querySelector('.wrap').appendChild(x)}return x}
+function order(){return rank().slice().reverse().map(p=>p.id)}
+function nextTurn(id){const o=order(),i=o.indexOf(id);return o[(i+1)%o.length]}
+function startTopics(){wagers.clear();finalAns.clear();topics=FT.map((x,i)=>({i,name:x[0],active:true}));turn=order()[0];phase='topics';bc('topics',{players:snap(),topics,turn});showTopics()}
+function showTopics(){show('play');$('play').classList.add('hidden');const x=fbox();x.innerHTML='<div class="roundBig">⚡ ФИНАЛЬНЫЙ РАУНД</div><h2>Выбор темы</h2><p>'+(me===turn?'Ваш ход: уберите одну тему':'Тему убирает '+(players.get(turn)?.name||'игрок'))+'</p><div id="topicGrid" class="topicGrid"></div>';topics.filter(t=>t.active).forEach(t=>{const b=document.createElement('button');b.className='topicBtn';b.textContent=t.name;b.disabled=me!==turn;b.onclick=()=>host?removeTopic(me,t.i):bc('remove_topic',{id:me,idx:t.i});$('topicGrid').appendChild(b)})}
+function removeTopic(id,idx){if(id!==turn||phase!=='topics')return;const t=topics.find(x=>x.i===idx&&x.active);if(!t)return;t.active=false;const left=topics.filter(x=>x.active);if(left.length===1){choice={name:FT[left[0].i][0],q:FT[left[0].i][1],a:FT[left[0].i][2]};phase='wager';bc('topic_chosen',{choice});showWager()}else{turn=nextTurn(id);bc('topic_update',{topics,turn});showTopics()}}
+function showWager(){const x=fbox(),max=Math.max(0,players.get(me)?.score||0);x.innerHTML='<div class="roundBig">⚡ ФИНАЛ</div><h2>Тема: '+choice.name+'</h2><input id="finalWager" class="field" type="number" min="0" max="'+max+'" value="'+max+'"><button id="finalWagerBtn" class="btn gold">Сделать ставку</button><div id="finalWait" class="notice hidden">Ставка принята. Ждём остальных…</div>';$('finalWagerBtn').onclick=()=>{const w=Math.max(0,Math.min(max,Number($('finalWager').value)||0));$('finalWagerBtn').disabled=true;$('finalWait').classList.remove('hidden');host?hostWager(me,w):bc('wager',{id:me,wager:w})}}
+function hostWager(id,w){if(wagers.has(id))return;wagers.set(id,w);if(wagers.size===players.size){phase='finalq';bc('final_q',{choice});showFinalQ()}}
+function showFinalQ(){const x=fbox();x.innerHTML='<div class="roundBig">⚡ ФИНАЛ</div><h2>'+choice.name+'</h2><div class="qText">'+choice.q+'</div><input id="finalAnswer" class="field" placeholder="Ваш тайный ответ"><button id="finalAnswerBtn" class="btn primary">Ответить</button><div id="finalWait" class="notice hidden">Ответ принят. Ждём остальных…</div>';$('finalAnswerBtn').onclick=()=>{const a=$('finalAnswer').value.trim();if(!a)return;$('finalAnswerBtn').disabled=true;$('finalWait').classList.remove('hidden');host?hostFinal(me,a):bc('final_answer',{id:me,answer:a})}}
+function hostFinal(id,a){if(finalAns.has(id))return;finalAns.set(id,a);if(finalAns.size===players.size){const results=[];players.forEach((p,id)=>{const w=wagers.get(id)||0,ans=finalAns.get(id)||'',good=ok(ans,choice.a);p.score+=good?w:-w;results.push({name:p.name,answer:ans,wager:w,correct:good})});bc('results',{players:snap(),results});showResults(results)}}
+function showResults(results){$('finalStage')?.remove();show('final');const rr=rank(),top=rr[0]?.score||0;$('winnerName').textContent=rr.filter(p=>p.score===top).map(p=>p.name).join(' и ');$('winnerScore').textContent=top+' очков';$('podium').innerHTML=results.map(r=>'<div class="finalReveal"><b>'+r.name+'</b><span>Ставка: '+r.wager+'</span><span>Ответ: '+r.answer+'</span><strong class="'+(r.correct?'ok':'bad')+'">'+(r.correct?'✓ +':'✕ −')+r.wager+'</strong></div>').join('')+'<hr>'+rr.map((p,i)=>'<div class="podiumRow"><span>'+(i+1)+'. '+p.name+'</span><strong>'+p.score+'</strong></div>').join('')}
+function mark(group,btn){group.forEach(x=>x.classList.remove('profileSelected'));btn.classList.add('profileSelected')}
+function profiles(id,prefix){const input=$(id),box=document.createElement('div');box.className='profileSetup';box.innerHTML='<div class="profileLabel">Аватар</div><div class="avatarChoices"></div><div class="profileLabel">Цвет</div><div class="colorChoices"></div>';const av=[],co=[];AV.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='avatarChoice';b.textContent=v;b.onclick=()=>{localStorage.setItem(prefix+'Avatar',i);mark(av,b)};av.push(b);box.querySelector('.avatarChoices').appendChild(b)});PC.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='colorChoice';b.style.background=v;b.onclick=()=>{localStorage.setItem(prefix+'Color',i);mark(co,b)};co.push(b);box.querySelector('.colorChoices').appendChild(b)});input.after(box);mark(av,av[Number(localStorage.getItem(prefix+'Avatar')||0)%8]);mark(co,co[Number(localStorage.getItem(prefix+'Color')||0)%8])}
+async function copyText(text){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return true}}catch(e){}try{const t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();t.setSelectionRange(0,t.value.length);const result=document.execCommand('copy');t.remove();return result}catch(e){return false}}
+function shareLink(){return $('shareLink').textContent.trim()||location.href}
+$('createBtn').onclick=create;$('joinManualBtn').onclick=()=>show('join');$('connectBtn').onclick=join;$('startBtn').onclick=start;$('answerBtn').onclick=answer;$('answerInput').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});$('copyBtn').onclick=async()=>{const old=$('copyBtn').textContent,success=await copyText(shareLink());$('copyBtn').textContent=success?'✓ Скопировано':'Не удалось';setTimeout(()=>$('copyBtn').textContent=old,1300)};$('shareBtn').onclick=async()=>{const url=shareLink();try{if(navigator.share){await navigator.share({title:'Своя игра',text:'Подключайся к игре',url});return}}catch(e){if(e?.name==='AbortError')return}const old=$('shareBtn').textContent,success=await copyText(url);$('shareBtn').textContent=success?'✓ Ссылка скопирована':'Не удалось';setTimeout(()=>$('shareBtn').textContent=old,1300)};
+profiles('creatorName','creator');profiles('joinName','guest');if(P.get('join')==='1'||rp){show('join');$('roomInput').value=rp}else show('home');$('netStatus').textContent='Supabase Realtime v20';
+})();
